@@ -14,6 +14,9 @@
       "page": "options.html",
       "open_in_tab": false
     },
+    "browser_action": {
+      "default_popup": "options.html"
+    },
     "background": {
         "scripts": ["script.js"],
         "persistent": true

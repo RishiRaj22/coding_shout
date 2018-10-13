@@ -17,6 +17,12 @@ function fetch_result(id) {
               }, function(items) {
                   var sound = items.sound;
                 if(sound === "tts") {
+                    if(result.result_code === 'time') {
+                        result.result_code = 'Time limit exceeded';
+                    }
+                    if(result.result_code === 'partial_accepted') {
+                        result.result_code = 'Partially accepted';
+                    }
                     chrome.tts.speak(result.result_code);
                 } else {
                     chrome.notifications.create(id, {
