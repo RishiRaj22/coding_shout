@@ -1,0 +1,22 @@
+{
+    "name": "Codechef Shout",
+    "description" : "Stop staring at your screen waiting for the result to pop up, relax and let this extension notify you with the results",
+    "version": "1.0",
+    "manifest_version": 2,
+    "icons": {
+        "16": "icon_16.png",
+        "32": "icon_32.png",
+        "48": "icon_48.png",
+        "128": "icon_128.png"
+      },
+    "options_page": "options.html",
+    "options_ui": {
+      "page": "options.html",
+      "open_in_tab": false
+    },
+    "background": {
+        "scripts": ["script.js"],
+        "persistent": true
+      },
+      "permissions": ["notifications","storage","tts","webRequest","*://*.codechef.com/submit/complete/*", "*://*.codechef.com/get_submission_status/*"]
+}

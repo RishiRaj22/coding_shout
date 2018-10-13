@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head><title>Codechef shout</title></head>
+<style>
+    * {
+        padding: 5px;
+    }
+    select {
+        float: right;
+    }
+    #status {
+        clear: both;
+        height: 20px;
+        width: 100%;
+        text-align: center;
+        margin: 0 auto;
+    }
+    button {
+        clear: both;
+        width: 100%;
+        margin: 5px auto;
+    }
+</style>
+<body>
+Alert type
+<select id="sound">
+    <option value="tts">Text to speech</option>
+    <option value="ping">Notification</option>
+</select>
+<div id="status"></div>
+<button id="save">Save</button>
+<script src="options.js"></script>
+</body>
+</html>
