@@ -15,4 +15,4 @@ git clone https://github.com/RishiRaj22/codechef_shout.git
 Voila, you have just made your life a lot easier!
 
 
-Feel free to live some stars. Enjoy coding!
+Feel free to give some stars. Enjoy coding!
