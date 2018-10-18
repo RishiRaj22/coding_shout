@@ -5,6 +5,11 @@ Frustrated of staring at your screen waiting for the result of your codechef sub
 ![Demo](demo.gif)
 
 # Installation
+
+### Firefox
+Download from [Firefox addons](https://addons.mozilla.org/en-US/firefox/addon/codechef-shout/)
+
+### Chrome
 ```
 git clone https://github.com/RishiRaj22/codechef_shout.git
 ```
