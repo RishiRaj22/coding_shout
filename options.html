@@ -3,10 +3,10 @@
 <head><title>Codechef shout</title></head>
 <style>
     * {
-        padding: 5px;
+        padding: 3px;
     }
     select {
-        float: right;
+        min-width: 100%;
     }
     #status {
         clear: both;
@@ -20,13 +20,28 @@
         width: 100%;
         margin: 5px auto;
     }
+    p {
+        clear:both;
+        width: 100%;
+        margin: 5px auto;
+        text-align: center;
+    }
 </style>
 <body>
-Alert type
-<select id="sound">
-    <option value="tts">Text to speech</option>
-    <option value="ping">Notification</option>
-</select>
+<div>
+    <p>Alert type</p>
+    <select id="sound">
+        <option value="tts">Text to speech</option>
+        <option value="ping">Notification</option>
+    </select>
+</div>
+<div>
+    <p>Speak (if TTS is enabled)</p>
+    <select id="type">
+        <option value="status">Status</option>
+        <option value="all">Status + Points + Time</option>
+    </select>
+</div>
 <div id="status"></div>
 <button id="save">Save</button>
 <script src="options.js"></script>

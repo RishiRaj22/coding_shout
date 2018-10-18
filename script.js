@@ -13,9 +13,11 @@ function fetch_result(id) {
             },200);
         } else {
             chrome.storage.sync.get({
-                sound: 'tts'
+                sound: 'tts',
+                type: 'all'
               }, function(items) {
                 var sound = items.sound;
+                var type = items.type;
                 if(result.result_code === 'time') {
                     result.result_code = 'Time limit exceeded';
                 }
@@ -23,13 +25,25 @@ function fetch_result(id) {
                     result.result_code = 'Partially accepted';
                 }
                 if(sound === "tts") {
-                    chrome.tts.speak(result.result_code);
+                    var message = result.result_code;
+                    if(type === "all") {
+                        if(result.score !== null || result.time !== null) {
+                            message += ",";
+                        }
+                        if(result.score !== null) {
+                            message += "score " + result.score + ",";
+                        }
+                        if(result.time !== null) {
+                            message += "time "+ result.time + " seconds";
+                        }
+                    }
+                    chrome.tts.speak(message);
                 } else {
                     chrome.notifications.create(id, {
                         type: "basic",
                         iconUrl: "icon_128.png",
                         title: result.result_code,
-                        message: "Scored " + result.score + " and took " + result.time + " seconds"
+                        message: (result.score === null ? "Took " : "Scored " + result.score + " and took ") +  + result.time + " seconds"
                     }) 
                 }
               });
