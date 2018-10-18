@@ -5,12 +5,8 @@ Frustrated of staring at your screen waiting for the result of your codechef sub
 ![Demo](demo.gif)
 
 # Installation
-```
-git clone https://github.com/RishiRaj22/codechef_shout.git
-```
-* In Chrome go to Options > More tools > Extensions
-* Enable developer mode in top right corner
-* Click on 'Load unpacked' and select the folder codechef_shout
+
+[Download from Firefox add-ons](https://addons.mozilla.org/en-US/firefox/addon/codechef-shout/)
 
 Voila, you have just made your life a lot easier!
 

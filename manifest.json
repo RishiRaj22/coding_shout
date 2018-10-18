@@ -1,7 +1,7 @@
 {
     "name": "Codechef Shout",
     "description" : "Stop staring at your screen waiting for the result to pop up, relax and let this extension notify you with the results",
-    "version": "1.0",
+    "version": "1.1",
     "manifest_version": 2,
     "icons": {
         "16": "icon_16.png",

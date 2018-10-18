@@ -11,7 +11,7 @@ var speak = (function(text) {
     if(browser.tts) {
         browser.tts.speak(text);
     } else {
-        window.speechSynthesis.speak(new SpeechSynthesisUtterance(text));
+        speechSynthesis.speak(new SpeechSynthesisUtterance(text));
     }
 });
 
