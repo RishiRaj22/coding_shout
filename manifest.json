@@ -9,6 +9,11 @@
         "48": "icon_48.png",
         "128": "icon_128.png"
       },
+    "applications": {
+      "gecko": {
+        "id": "codechef_shout@rishiraj.me"
+      }
+    },
     "options_ui": {
       "page": "options.html",
       "open_in_tab": false
@@ -20,5 +25,5 @@
         "scripts": ["script.js"],
         "persistent": true
       },
-      "permissions": ["notifications","storage","tts","webRequest","*://*.codechef.com/submit/complete/*", "*://*.codechef.com/get_submission_status/*"]
+      "permissions": ["notifications","storage","webRequest","*://*.codechef.com/submit/complete/*", "*://*.codechef.com/get_submission_status/*"]
 }
