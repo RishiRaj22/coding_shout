@@ -1,6 +1,20 @@
 "use strict";
 var listening = [];
 
+window.browser = (function () {
+    return window.msBrowser ||
+      window.browser ||
+      window.chrome;
+  })();
+
+var speak = (function(text) {
+    if(browser.tts) {
+        browser.tts.speak(text);
+    } else {
+        window.speechSynthesis.speak(new SpeechSynthesisUtterance(text));
+    }
+});
+
 function fetch_result(id) {
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "https://www.codechef.com/get_submission_status/" + id, true);
@@ -12,7 +26,7 @@ function fetch_result(id) {
                 fetch_result(id);
             },200);
         } else {
-            chrome.storage.sync.get({
+            browser.storage.sync.get({
                 sound: 'tts',
                 type: 'all'
               }, function(items) {
@@ -37,9 +51,9 @@ function fetch_result(id) {
                             message += "time "+ result.time + " seconds";
                         }
                     }
-                    chrome.tts.speak(message);
+                    speak(message);
                 } else {
-                    chrome.notifications.create(id, {
+                    browser.notifications.create(id, {
                         type: "basic",
                         iconUrl: "icon_128.png",
                         title: result.result_code,
@@ -51,7 +65,7 @@ function fetch_result(id) {
         }
     };
 }
-chrome.webRequest.onBeforeRequest.addListener(function (request) {
+browser.webRequest.onBeforeRequest.addListener(function (request) {
     var url = request.url;
     var arr = url.split("/");
     var id = arr[arr.length - 1];

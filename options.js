@@ -1,8 +1,14 @@
-// Saves options to chrome.storage
+window.browser = (function () {
+  return window.msBrowser ||
+    window.browser ||
+    window.chrome;
+})();
+
+// Saves options to browser.storage
 function save_options() {
     var sound = document.getElementById('sound').value;
     var type = document.getElementById('type').value;
-    chrome.storage.sync.set({
+    browser.storage.sync.set({
       sound: sound,
       type: type
     }, function() {
@@ -17,7 +23,7 @@ function save_options() {
   
 
   function restore_options() {
-    chrome.storage.sync.get({
+    browser.storage.sync.get({
       sound: 'tts',
       type: 'all'
     }, function(items) {
