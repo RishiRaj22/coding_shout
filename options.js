@@ -33,3 +33,13 @@ function save_options() {
   }
   document.addEventListener('DOMContentLoaded', restore_options);
   document.getElementById('save').addEventListener('click', save_options);
+
+  var authorClick = function() {
+    browser.tabs.create({url: 'https://rishiraj.me'});
+  };
+  var githubClick = function() {
+    browser.tabs.create({url: 'https://github.com/RishiRaj22/codechef_shout'});
+  };
+
+  document.getElementById('author').addEventListener('click', authorClick);
+  document.getElementById('github').addEventListener('click', githubClick);
