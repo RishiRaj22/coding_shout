@@ -65,6 +65,38 @@ function fetch_result(id) {
         }
     };
 }
+
+function handleMessage(request, sender, sendResponse) {
+    var verdict = request.verdict;
+    var time = request.time;
+    var mem = request.mem;
+    var id = request.id;
+    var details = "Time taken " + time + "\nMemory used " + mem;
+    browser.storage.sync.get({
+      sound: 'tts',
+      type: 'all'
+    }, function(items) {
+      var sound = items.sound;
+      var type = items.type;
+      if(sound === "tts") {
+          var message = verdict;
+          if(type === "all") {
+              message += "\n"+details;
+          }
+          speak(message);
+      } else {
+          browser.notifications.create(id, {
+              type: "basic",
+              iconUrl: "icon_128.png",
+              title: verdict,
+              message: details
+          })
+      }
+    });
+}
+
+browser.runtime.onMessage.addListener(handleMessage);
+
 browser.webRequest.onBeforeRequest.addListener(function (request) {
     var url = request.url;
     var arr = url.split("/");
