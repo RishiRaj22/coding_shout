@@ -10,9 +10,9 @@ Frustrated of staring at your screen waiting for the result of your codechef sub
 Download from [Firefox addons](https://addons.mozilla.org/en-US/firefox/addon/codechef-shout/)
 
 ### Chrome
-```
-git clone https://github.com/RishiRaj22/codechef_shout.git
-```
+
+* Click 'Clone or Download' and select 'Download ZIP'
+* Extract the zip
 * In Chrome go to Options > More tools > Extensions
 * Enable developer mode in top right corner
 * Click on 'Load unpacked' and select the folder codechef_shout
