@@ -1,5 +1,7 @@
-# Codechef Shout
-Frustrated of staring at your screen waiting for the result of your codechef submission to pop up, relax and let this extension notify you as soon as the results appear. It uses text to speech to say the result, or if you prefer being silently notified, there is an option for that too. 
+# Coding Shout
+Frustrated of staring at your screen waiting for the result of your Codeforces and Codechef submission to pop up? Relax and let this extension notify you as soon as the results appear. It uses text to speech to say the result, or if you prefer being silently notified, there is an option for that too.
+
+Note that it currently doesnot handle System testing.
 
 # Demo
 ![Demo](demo.gif)
@@ -15,7 +17,7 @@ Download from [Firefox addons](https://addons.mozilla.org/en-US/firefox/addon/co
 * Extract the zip
 * In Chrome go to Options > More tools > Extensions
 * Enable developer mode in top right corner
-* Click on 'Load unpacked' and select the folder codechef_shout
+* Click on 'Load unpacked' and select the folder coding_shout
 
 Voila, you have just made your life a lot easier!
 
