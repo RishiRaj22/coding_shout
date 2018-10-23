@@ -71,7 +71,11 @@ function handleMessage(request, sender, sendResponse) {
     var time = request.time;
     var mem = request.mem;
     var id = request.id;
+    var score = request.score;
     var details = "Time taken " + time + "\nMemory used " + mem;
+    if (typeof score != 'undefined') {
+        details += "\nScore " + score;
+    }
     browser.storage.sync.get({
       sound: 'tts',
       type: 'all'
