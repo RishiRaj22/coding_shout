@@ -7,7 +7,9 @@ window.browser = (function () {
 var statuses = [].slice.call(document.getElementsByClassName("status-cell")).filter(it => it.getAttribute("waiting") === "true");
 var s = function() {
   statuses.forEach((st,i,ob) => {
-    var wait = st.getElementsByClassName("verdict-waiting").length > 0;
+    var wait =
+      st.getElementsByClassName("verdict-waiting").length > 0 ||
+      st.getElementsByTagName("span").length === 0;
     if(wait === false) {
       var verdict = st.innerText;
       var time = [].slice.call(st.parentElement.getElementsByClassName("time-consumed-cell"))[0].innerText;
