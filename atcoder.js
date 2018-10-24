@@ -9,7 +9,7 @@ var submissions = [].slice.call(document.getElementsByClassName("waiting-judge")
 
 function fetch_atcoder_result(base_url, ids) {
     var xhr = new XMLHttpRequest();
-    var url_param = [].slice.call(ids).map(it => "sids[]=" + ids).join("&")
+    var url_param = [].slice.call(ids).map(it => "sids[]=" + it).join("&")
     var ids_to_refresh = []
     var url = base_url + "/status/json?" + url_param;
     xhr.open("GET", url, true);
