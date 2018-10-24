@@ -19,11 +19,11 @@ function fetch_atcoder_result(base_url, ids) {
         ids.forEach(function(id) {
             var obj = result[id];
             if (obj["Html"].includes("waiting-judge")) {
-                /* On AtCoder, a solution can be marked as judging and WA,TLE,MLE,RE at the same time. 
+                /* On AtCoder, a solution can be marked as judging and WA,TLE,MLE,RE at the same time.
                  * This means that the solution is still being run on more testcases. When this happens,
-                 * the running time, consumed memory and score is not yet available. Since AtCoder has 
+                 * the running time, consumed memory and score is not yet available. Since AtCoder has
                  * partial scores, we do not report the verdict just yet. */
-                ids_to_refresh.push(id);        
+                ids_to_refresh.push(id);
             } else {
                 var score = obj["Score"];
                 var verdict = /title=\"([^\"]*)\"/g.exec(obj["Html"])[1];
@@ -38,7 +38,7 @@ function fetch_atcoder_result(base_url, ids) {
                 });
             }
         });
-        
+
         if (ids_to_refresh.length > 0) {
             setTimeout(function() {
                 fetch_atcoder_result(base_url, ids_to_refresh);
