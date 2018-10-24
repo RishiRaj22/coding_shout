@@ -27,12 +27,12 @@ function fetch_atcoder_result(base_url, ids) {
             } else {
                 var score = obj["Score"];
                 var verdict = /title=\"([^\"]*)\"/g.exec(obj["Html"])[1];
-                var time = /[0-9]* ms/g.exec(obj["Html"])[0];
-                var mem = /[0-9]* KB/g.exec(obj["Html"])[0];
+                var time = /[0-9]* ms/g.exec(obj["Html"]);
+                var mem = /[0-9]* KB/g.exec(obj["Html"]);
                 browser.runtime.sendMessage({
                     verdict: verdict,
-                    time: time,
-                    mem: mem,
+                    time: time ? time[0] : undefined,
+                    mem: mem ? mem[0] : undefined,
                     id: id,
                     score: score
                 });
