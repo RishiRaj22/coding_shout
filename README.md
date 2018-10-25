@@ -18,11 +18,7 @@ Download from [Firefox addons](https://addons.mozilla.org/en-US/firefox/addon/co
 
 ### Chrome
 
-* Click 'Clone or Download' and select 'Download ZIP'
-* Extract the zip
-* In Chrome go to Options > More tools > Extensions
-* Enable developer mode in top right corner
-* Click on 'Load unpacked' and select the folder coding_shout
+Download from [Chrome Web Store](https://chrome.google.com/webstore/detail/coding-shout/nggokghmfinpljihgjkkbogpgbbjjjme)
 
 Voila, you have just made your life a lot easier!
 
