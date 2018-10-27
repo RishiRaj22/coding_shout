@@ -1,12 +1,14 @@
 "use strict";
 var listening = [];
 
+// For cross-browser compatibility
 window.browser = (function () {
     return window.msBrowser ||
       window.browser ||
       window.chrome;
   })();
 
+// For cross-browser Text to Speech
 var speak = (function(text) {
     if(browser.tts) {
         browser.tts.speak(text);
@@ -15,7 +17,11 @@ var speak = (function(text) {
     }
 });
 
-function fetch_result(id) {
+/**
+ * Fetch the result of codechef submission
+ * @param {string} id The ID of the codechef submission whose result is to be fetched
+ */
+function fetch_codechef_result(id) {
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "https://www.codechef.com/get_submission_status/" + id, true);
     xhr.send();
@@ -23,7 +29,7 @@ function fetch_result(id) {
         var result = JSON.parse(xhr.response);
         if(result.result_code === 'wait') {
             setTimeout(function() {
-                fetch_result(id);
+                fetch_codechef_result(id);
             },200);
         } else {
             browser.storage.sync.get({
@@ -33,49 +39,53 @@ function fetch_result(id) {
                 var sound = items.sound;
                 var type = items.type;
                 if(result.result_code === 'time') {
-                    result.result_code = 'Time limit exceeded';
+                    result.result_code = 'Time Limit Exceeded';
                 }
-                if(result.result_code === 'partial_accepted') {
-                    result.result_code = 'Partially accepted';
-                }
-                if(sound === "tts") {
-                    var message = result.result_code;
-                    if(type === "all") {
-                        if(result.score !== null || result.time !== null) {
-                            message += ",";
-                        }
-                        if(result.score !== null) {
-                            message += "score " + result.score + ",";
-                        }
-                        if(result.time !== null) {
-                            message += "time "+ result.time + " seconds";
-                        }
-                    }
-                    speak(message);
-                } else {
-                    browser.notifications.create(id, {
-                        type: "basic",
-                        iconUrl: "icon_128.png",
-                        title: result.result_code,
-                        message: (result.score === null ? "Took " : "Scored " + result.score + " and took ") +  + result.time + " seconds"
-                    }) 
-                }
+                result.result_code = result.result_code
+                    .split("_")
+                    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                    .join(" ");
+                notify(result.result_code,result.score,result.time,null,result.id);
               });
             listening.splice(listening.indexOf(id),1);
         }
     };
 }
 
+/**
+ * Handles messages sent from content-scripts running on Codeforces and AtCoder
+ * @param {Object} request Contains verdict, time taken, memory consumed by the submission
+ * @param {*} sender
+ * @param {*} sendResponse
+ */
 function handleMessage(request, sender, sendResponse) {
     var verdict = request.verdict;
     var time = request.time;
     var mem = request.mem;
     var id = request.id;
     var score = request.score;
-    var details = []
-    if (typeof time != 'undefined') details.push("Time taken " + time);
-    if (typeof mem != 'undefined') details.push("Memory used " + mem);
-    if (typeof score != 'undefined') details.push("\nScore " + score);
+    notify(verdict,score,time,mem,id);
+}
+
+/**
+ * Notifies about the result of the submission
+ * @param {string} verdict The result of the submission.
+ * @param {*} score The score obtained through the submission (optional)
+ * @param {*} time The time taken in code execution (optional)
+ * @param {*} mem The memory required in code execution (optional)
+ * @param {string} id The id of the submission (optional)
+ */
+function notify(verdict,score,time,mem,id) {
+    var details = [];
+    if (score != null && typeof score != 'undefined') {
+        details.push("Score " + score);
+    }
+    if (time != null && typeof time != 'undefined') {
+        details.push("Time taken " + time);
+    }
+    if (mem != null && typeof mem != 'undefined') {
+        details.push("Memory used " + mem);
+    }
     details = details.join("\n");
     browser.storage.sync.get({
       sound: 'tts',
@@ -90,6 +100,10 @@ function handleMessage(request, sender, sendResponse) {
           }
           speak(message);
       } else {
+        //If ID is there, use that for a unique ID or else generate a random one
+        if(typeof id == 'undefined') {
+            id = Math.random().toString(36);
+        }
           browser.notifications.create(id, {
               type: "basic",
               iconUrl: "icon_128.png",
@@ -102,6 +116,10 @@ function handleMessage(request, sender, sendResponse) {
 
 browser.runtime.onMessage.addListener(handleMessage);
 
+/**
+ * As soon as there is a request for the result of a submission from Codechef,
+ * start fetching the result for that particular ID
+ */
 browser.webRequest.onBeforeRequest.addListener(function (request) {
     var url = request.url;
     var arr = url.split("/");
@@ -111,6 +129,6 @@ browser.webRequest.onBeforeRequest.addListener(function (request) {
     }
     if(!listening.includes(id)) {
         listening.push(id);
-        fetch_result(id);
+        fetch_codechef_result(id);
     }
 },{"urls":["*://*.codechef.com/submit/complete/*"]})
