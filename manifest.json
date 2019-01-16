@@ -16,7 +16,7 @@
           "js": ["codeforces.js"]
         },
         {
-          "matches": ["*://beta.atcoder.jp/contests/*/submissions/me"],
+          "matches": ["*://*.atcoder.jp/contests/*/submissions/me"],
           "run_at": "document_idle",
           "js": ["atcoder.js"]
         }
