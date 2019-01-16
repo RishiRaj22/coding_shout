@@ -1,7 +1,7 @@
 {
     "name": "Coding Shout",
     "description" : "Stop staring at your screen waiting for the result to pop up. Relax and let this extension notify you with the results",
-    "version": "1.6",
+    "version": "1.7",
     "manifest_version": 2,
     "icons": {
         "16": "icon_16.png",
